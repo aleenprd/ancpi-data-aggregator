@@ -65,7 +65,7 @@ def main():
     )
 
     print("Fetching files...")
-    for url in month_urls[:2]:
+    for url in month_urls:
         print(f"Scraping URL: {url}")
 
         soup = scraper.get_soup(url)
