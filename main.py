@@ -49,6 +49,8 @@ def parse_args():
         "--sleep_time",
         type=int,
         default=3,
+        required=False,
+        choices=range(1, 10),
         help="Sleep time between pages in seconds",
     )
     return parser.parse_args()
