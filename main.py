@@ -1,7 +1,7 @@
 import os
 import argparse
 from datetime import datetime
-from time import time
+from time import time, sleep
 from ancpi_aggregator import Scraper
 
 
@@ -45,6 +45,12 @@ def parse_args():
         default="data",
         help="Directory to save the scraped data",
     )
+    parser.add_argument(
+        "--sleep_time",
+        type=int,
+        default=3,
+        help="Sleep time between pages in seconds",
+    )
     return parser.parse_args()
 
 
@@ -82,6 +88,8 @@ def main():
             filepath = os.path.join(args.output_dir, dir, title)
 
             scraper.download_file(link, filepath)
+        
+        sleep(args.sleep_time)
 
 
 if __name__ == "__main__":
