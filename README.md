@@ -9,9 +9,14 @@ A Python tool for scraping and aggregating data from the National Agency for Cad
 - Save files to customizable output directories
 - Provides a simple command-line interface
 
-## Requirements
+## Dev Requirements
 
 - Python 3.12 or higher
+
+## Cloud Storage Requirements
+Authenticate to your Google Cloud project using OAuth:
+- Install [gcloud cli](https://cloud.google.com/sdk/docs/install#mac) for **your platform**.
+- Authenticate using `gcloud init` and `gcloud auth application-default login`.
 
 ## Installation
 
@@ -50,18 +55,20 @@ python main.py
 Customize the scraping parameters:
 
 ```bash
-python main.py --start_year 2023 --end_year 2025 --start_month 6 --end_month 3 --output_dir custom_data
+python main.py --start_year 2023 --end_year 2025 --start_month 6 --end_month 3 --output_dir data
 ```
 
 ### Arguments
 
 | Argument | Description | Default |
 |----------|-------------|---------|
+| `--mode` | Mode of the application (scrape or upload). | scrape |
 | `--start_year` | Starting year for data collection | 2024 |
 | `--end_year` | Ending year for data collection | 2025 |
 | `--start_month` | Starting month (1-12) | 1 |
 | `--end_month` | Ending month (1-12) | Current month |
 | `--output_dir` | Directory to save downloaded files | data |
+| `--bucket_name` | The name of cloud storage bucket. | ancpi-aggregator |
 
 ## Project Structure
 
@@ -74,6 +81,7 @@ ancpi-data-aggregator/
 ├── main.py                 # CLI entry point
 ├── pyproject.toml          # Project metadata and dependencies
 └── README.md               # This file
+
 ```
 
 ## How It Works
