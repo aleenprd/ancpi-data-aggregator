@@ -27,12 +27,13 @@ class Scraper:
         "decembrie",  # December
     ]
 
-    def get_soup(self, url: str) -> BeautifulSoup:
+    def get_soup(self, url: str) -> BeautifulSoup | None:
         """
         Scrape the content from the given URL and get a soup.
 
         :param url: The URL to scrape.
-        :return: The scraped content as a BeautifulsoupObject.
+        :return: The scraped content as a BeautifulsoupObject. 
+        If an error occurs, return None.
         """
         try:
             response = requests.get(url, headers=self.headers)
@@ -41,7 +42,7 @@ class Scraper:
 
         except requests.RequestException as e:
             print(f"An error occurred while scraping: {e}")
-            return ""
+            return None
 
     def get_attachment_urls(self, soup: BeautifulSoup) -> dict[str, str]:
         """
@@ -126,9 +127,9 @@ class Scraper:
         :param path: The directory and filename where the file will be saved.
         """
         try:
-            response = requests.get(url, headers=self.headers)
+            response = requests.get(url, headers=self.headers, allow_redirects=True)
             response.raise_for_status()  # Raise an error for bad responses
-
+    
             with open(path, "wb") as file:
                 file.write(response.content)
             print(f"Downloaded: {path}")
