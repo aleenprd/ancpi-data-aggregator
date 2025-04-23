@@ -67,6 +67,19 @@ def parse_args():
         default="ancpi-aggregator",
         help="Google Cloud Storage bucket name for uploading files",
     )
+    parser.add_argument(
+        "--clean",
+        action="store_true",
+        help="Clean and transform the scraped data after download"
+    )
+    
+    parser.add_argument(
+        "--transform_output_dir",
+        type=str,
+        default="transformed_data",
+        help="Directory to save the transformed data",
+    )
+    
     return parser.parse_args()
 
 
